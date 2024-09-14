@@ -3,28 +3,30 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const Footer = () => {
-  const formik = useFormik({
-    initialValues: {
-      email: "",
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required"),
-    }),
-    onSubmit: (values, { resetForm }) => {
-      // Show toast notification when form is valid and submitted
-      toast.success("Email submitted successfully!", {
-        // position: toast.POSITION.CENTER,
-        autoClose: 3000,
-      });
-
-      // Reset form after submission
-      resetForm();
-    },
+  // Form validation schema using Yup
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
   });
+
+  // Function to handle form submission
+  const handleSubmit = (values, { resetForm }) => {
+    // Mock submission or actual API call can go here
+    console.log(values);
+
+    // Show toast message on success
+    toast.success("Successfully subscribed to the newsletter!", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+
+    // Reset the form after submission
+    resetForm();
+  };
 
   return (
     <footer>
@@ -95,29 +97,41 @@ const Footer = () => {
             <h3 className="font-semibold text-sm uppercase tracking-wide">
               Newsletter
             </h3>
-            <form onSubmit={formik.handleSubmit} class="mt-4 flex">
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter Your Email Address"
-                className={`px-4 py-2 border &{formik.touched.email && formik.errors.email ? 'border-red-500' : 'border-gray-300'}  rounded-l-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm`}
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
 
-              <button
-                type="submit"
-                className=" text-black underline px-4 py-2 rounded-r-md hover:bg-gray-200 text-sm"
-              >
-                Subscribe
-              </button>
-            </form>
-
-            {formik.touched.email && formik.errors.email ? (
-              <p className="text-red-500 text-xs mt-2">{formik.errors.email}</p>
-            ) : null}
+            <Formik
+              initialValues={{ email: "" }}
+              validationSchema={validationSchema}
+              onSubmit={handleSubmit}
+            >
+              {({ isSubmitting }) => (
+                <Form className="flex items-center justify-center mt-5">
+                  <div className=" flex">
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Enter Your Email Address"
+                      className=" underline"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className=" text-red-500 border-2 border-blue-600"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className=" text-black underline px-4 py-2 rounded-r-md hover:bg-gray-200 text-sm"
+                  >
+                    SUBSCRIBE
+                  </button>
+                </Form>
+              )}
+            </Formik>
           </div>
+
+          {/* Toastify container to display toast messages */}
+          <ToastContainer />
         </div>
 
         <div className="mt-10 border-t border-gray-300 pt-6 text-sm text-gray-500 text-left">

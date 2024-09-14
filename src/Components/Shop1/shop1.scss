@@ -1,0 +1,17 @@
+@import "../Scss/extends";
+
+#Shop1 {
+  div {
+    h3 {
+      @extend .pop24;
+    }
+
+    p {
+      @extend .pop16;
+    }
+
+    h4 {
+      @extend .pop20;
+    }
+  }
+}

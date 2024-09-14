@@ -18,7 +18,7 @@ const Products = () => {
         </div>
 
         <div>
-          <div className="flex items-center justify-center gap-8 mb-8 ">
+          <div className="flex flex-row items-center justify-center gap-8 mb-8  ">
             <div className="relative">
               <img src={cafe} alt="chair" />
               <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">

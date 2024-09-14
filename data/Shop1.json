@@ -1,0 +1,25 @@
+{
+  "images": {
+    "cloudName": "drqaon7o8",
+    "image1": {
+      "url": "https://res.cloudinary.com/drqaon7o8/image/upload/v1725936552/image_1_zh7vtf.png",
+      "disc": "text"
+    },
+    "image2": {
+      "url": "https://res.cloudinary.com/drqaon7o8/image/upload/v1725936553/image_2_jckztc.png",
+      "disc": "text"
+    },
+    "image3": {
+      "url": "https://res.cloudinary.com/drqaon7o8/image/upload/v1725937785/image_3_ngqxvm.png",
+      "disc": "text"
+    },
+    "image4": {
+      "url": "https://res.cloudinary.com/drqaon7o8/image/upload/v1726039145/image_4_bacf2o.png",
+      "disc": "text"
+    },
+    "Asgaardsofa3": {
+      "url": "https://res.cloudinary.com/drqaon7o8/image/upload/v1726236123/Asgaard_sofa_3_pqsgp8.png",
+      "disc": "text"
+    }
+  }
+}
