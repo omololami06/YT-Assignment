@@ -8,8 +8,10 @@ import muggo from "../../assets/muggo.svg";
 import ping from "../../assets/ping.svg";
 import potty from "../../assets/potty.svg";
 import "./products.scss";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+  let redir = useNavigate();
   return (
     <div id="Products">
       <section className=" flex flex-col items-center justify-center mt-[56px]">

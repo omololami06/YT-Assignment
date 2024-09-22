@@ -550,9 +550,9 @@ const Shop1 = () => {
             </div>
           </div>
         </div>
-        {/* <Pagination /> */}
-        {/* <SingleProduct /> */}
       </div>
+      <Pagination itemsPerPage={4} />
+      {/* <SingleProduct /> */}
     </div>
   );
 };
