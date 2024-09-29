@@ -6,552 +6,83 @@ import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
 import SingleProduct from "../SingleProduct/SingleProduct";
 import { useNavigate } from "react-router-dom";
+import { products } from "./shopProduct.json";
+import { useState } from "react";
 
 const Shop1 = () => {
-  const navigate = useNavigate();
+  // State to keep track of the cart count
+  const [cartCount, setCartCount] = useState(0);
 
-  const handleCompareClick = () => {
-    navigate("/SingleProduct");
+  // Function to handle adding to cart
+  const handleAddToCart = () => {
+    // Increment the cart count
+    setCartCount(cartCount + 1);
+  };
+
+  const navigate = useNavigate();
+  // Navigate to the compare page with the product's ID
+  const handleComparison = () => {
+    navigate(`/comparison/${products.id}`); // Add product ID for navigation
   };
 
   return (
     <div id="Shop1">
-      <div className="flex flex-row items-center justify-center gap-8 mb-8 ">
-        <div className="relative font-poppins">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image1.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs  ">
-            <h5>-30%</h5>
-          </div>
-          <div>
-            <h3>Syltherine</h3>
-            <p>Stylish cafe chair</p>
-            <div className="flex gap-3">
-              <h4>Rp 2.500.000</h4>
-              <div>
-                <h6 className="line-through">Rp 3.500.000</h6>
+      <div className="flex flex-col items-center p-10 mx-auto max-w-screen-xl">
+        <h2 className="text-[36px] font-bold"></h2>
+        <ul className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-poppins">
+          {products.map((each) => (
+            <div className="relative" key={each.id}>
+              <Image
+                cloudName={each.cloudName}
+                publicId={each.publicId}
+                loading="lazy"
+                className="relative"
+              />
+              {each.discount && (
+                <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs  ">
+                  <h5>{each.discount}</h5>
+                </div>
+              )}
+
+              <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
+                <div className="text-center space-y-4">
+                  <button
+                    className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg"
+                    onClick={handleAddToCart}
+                  >
+                    Add to Cart
+                  </button>
+
+                  <div className="flex space-x-4 text-white">
+                    <button className="hover:underline">Share</button>
+                    <button
+                      className="hover:underline"
+                      onClick={handleComparison}
+                    >
+                      Compare
+                    </button>
+                    <button className="hover:underline">Like</button>
+                  </div>
+                </div>
+              </div>
+              <div className="">
+                <h3 className="font-semibold text-[25px]">{each.name}</h3>
+                <p className="text-gray-500 text-sm"> {each.description}</p>
+                <div className="flex gap-5">
+                  <p className="font-semibold"> {each.price}</p>
+                  <div>
+                    <p className="line-through text-gray-500">
+                      {each.oldPrice}
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                {/* <Link to="/SingleProduct"> */}
-                <button
-                  onClick={handleCompareClick}
-                  className="hover:underline"
-                >
-                  Compare
-                </button>
-                {/* </Link> */}
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image2.url}
-          />
-          <div>
-            <h3>Leviosa</h3>
-            <p>Stylish cafe chair</p>
-            <h4>Rp 2.500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image3.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>-50%</h5>
-          </div>
-          <div>
-            <h3>Lolito</h3>
-            <p>Luxury big sofa</p>
-            <div className="flex gap-3">
-              <h4>Rp 7.000.000</h4>
-              <div>
-                <h6 className="line-through">Rp 14.000.000</h6>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image4.url}
-          />
-          <div className="absolute top-6 bg-green-300 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>New</h5>
-          </div>
-          <div>
-            <h3>Respira</h3>
-            <p>Outdoor bar table and stool</p>
-            <h4>Rp 500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
+          ))}
+        </ul>
       </div>
-      <div className="flex flex-row items-center justify-center gap-8 mb-8">
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image1.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs  ">
-            <h5>-30%</h5>
-          </div>
-          <div>
-            <h3>Syltherine</h3>
-            <p>Stylish cafe chair</p>
-            <div className="flex gap-3">
-              <h4>Rp 2.500.000</h4>
-              <div>
-                <h6 className="line-through">Rp 3.500.000</h6>
-              </div>
-            </div>
-          </div>
 
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image2.url}
-          />
-          <div>
-            <h3>Leviosa</h3>
-            <p>Stylish cafe chair</p>
-            <h4>Rp 2.500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image3.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>-50%</h5>
-          </div>
-          <div>
-            <h3>Lolito</h3>
-            <p>Luxury big sofa</p>
-            <div className="flex gap-3">
-              <h4>Rp 7.000.000</h4>
-              <div>
-                <h6 className="line-through">Rp 14.000.000</h6>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image4.url}
-          />
-          <div className="absolute top-6 bg-green-300 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>New</h5>
-          </div>
-          <div>
-            <h3>Respira</h3>
-            <p>Outdoor bar table and stool</p>
-            <h4>Rp 500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-center gap-8 mb-8">
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image1.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs  ">
-            <h5>-30%</h5>
-          </div>
-          <div>
-            <h3>Syltherine</h3>
-            <p>Stylish cafe chair</p>
-            <div className="flex gap-3">
-              <h4>Rp 2.500.000</h4>
-              <div>
-                <h6 className="line-through">Rp 3.500.000</h6>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image2.url}
-          />
-          <div>
-            <h3>Leviosa</h3>
-            <p>Stylish cafe chair</p>
-            <h4>Rp 2.500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image3.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>-50%</h5>
-          </div>
-          <div>
-            <h3>Lolito</h3>
-            <p>Luxury big sofa</p>
-            <div className="flex gap-3">
-              <h4>Rp 7.000.000</h4>
-              <div>
-                <h6 className="line-through">Rp 14.000.000</h6>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image4.url}
-          />
-          <div className="absolute top-6 bg-green-300 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>New</h5>
-          </div>
-          <div>
-            <h3>Respira</h3>
-            <p>Outdoor bar table and stool</p>
-            <h4>Rp 500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-row items-center justify-center gap-8 mb-8">
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image1.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs  ">
-            <h5>-30%</h5>
-          </div>
-          <div>
-            <h3>Syltherine</h3>
-            <p>Stylish cafe chair</p>
-            <div className="flex gap-3">
-              <h4>Rp 2.500.000</h4>
-              <div>
-                <h6 className="line-through">Rp 3.500.000</h6>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image2.url}
-          />
-          <div>
-            <h3>Leviosa</h3>
-            <p>Stylish cafe chair</p>
-            <h4>Rp 2.500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image3.url}
-          />
-          <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>-50%</h5>
-          </div>
-          <div>
-            <h3>Lolito</h3>
-            <p>Luxury big sofa</p>
-            <div className="flex gap-3">
-              <h4>Rp 7.000.000</h4>
-              <div>
-                <h6 className="line-through">Rp 14.000.000</h6>
-              </div>
-            </div>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative">
-          <Image
-            className="h-[301px]"
-            loading="lazy"
-            cloudName={images.cloudName}
-            publicId={images.image4.url}
-          />
-          <div className="absolute top-6 bg-green-300 text-white px-3 py-4 rounded-full w-12 h-12 text-xs text-center ">
-            <h5>New</h5>
-          </div>
-          <div>
-            <h3>Respira</h3>
-            <p>Outdoor bar table and stool</p>
-            <h4>Rp 500.000</h4>
-          </div>
-
-          <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center ">
-            <div className="text-center space-y-4">
-              <button className="bg-white text-yellow-600 font-bold py-2 px-6 rounded-lg">
-                Add to Cart
-              </button>
-
-              <div className="flex space-x-4 text-white">
-                <button className="hover:underline">Share</button>
-                <button className="hover:underline">Compare</button>
-                <button className="hover:underline">Like</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <Pagination itemsPerPage={4} />
+      {/* <Pagination itemsPerPage={4} /> */}
       {/* <SingleProduct /> */}
     </div>
   );

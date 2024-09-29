@@ -1,0 +1,8 @@
+#SingleProduct {
+  .section1 {
+    display: grid;
+    grid-template-columns: 100px 300px 700px;
+    gap: 50px;
+    justify-content: center;
+  }
+}

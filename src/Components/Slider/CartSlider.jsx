@@ -2,11 +2,15 @@ import React from "react";
 import cartbag from "../../assets/cartbag.svg";
 import classNames from "classnames";
 import { useLinkClickHandler } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CartSlider = ({ show, setShow }) => {
   let handleClose = (e) => {
     setShow((prev) => !prev);
   };
+
+  let redir = useNavigate();
+
   return (
     <div
       className={classNames(
@@ -33,13 +37,31 @@ const CartSlider = ({ show, setShow }) => {
         <hr />
 
         <div className="flex items-center justify-around  text-black mt-[188px]">
-          <button className="border-2 border-black rounded-full  p-2 ">
+          <button
+            className="border-2 border-black rounded-full  p-2"
+            onClick={(e) => {
+              handleClose(e);
+              redir("/Cart");
+            }}
+          >
             Cart
           </button>
-          <button className="border-2 border-black rounded-full  p-2 ">
+          <button
+            className="border-2 border-black rounded-full  p-2 "
+            onClick={(e) => {
+              handleClose(e);
+              redir("/Checkout");
+            }}
+          >
             Checkout
           </button>
-          <button className="border-2 border-black rounded-full  p-2 ">
+          <button
+            className="border-2 border-black rounded-full  p-2 "
+            onClick={(e) => {
+              handleClose(e);
+              redir("/Comparison");
+            }}
+          >
             Comparison
           </button>
         </div>

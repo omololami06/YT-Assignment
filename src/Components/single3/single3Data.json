@@ -1,0 +1,57 @@
+{
+  "related": [
+    {
+      "name": "Slytherine",
+      "id": 1,
+      "publicId": "https://res.cloudinary.com/dbrqcasoo/image/upload/v1725724713/slytherine_cntwmy.png",
+      "cloudName": "drqaon7o8",
+      "price": "Rp 2.500.000",
+      "oldPrice": "Rp 3.500.000",
+      "discount": "-30%",
+      "new": false,
+      "description": "Stylish cafe chair",
+      "sku": "SS001",
+      "tags": "Chair, Coffee",
+      "category": "Chair",
+      "quantity": 0
+    },
+    {
+      "name": "Leviosa",
+      "id": 2,
+      "publicId": "https://res.cloudinary.com/dbrqcasoo/image/upload/v1725724710/leviosa_qkjwwo.png",
+      "cloudName": "drqaon7o8",
+      "price": "Rp 2.500.000",
+      "new": false,
+      "description": "Stylish cafe chair",
+      "sku": "SS002",
+      "tags": "Chair, Coffee",
+      "category": "Chair"
+    },
+    {
+      "name": "Lolito",
+      "id": 3,
+      "publicId": "https://res.cloudinary.com/dbrqcasoo/image/upload/v1725724710/lolito_imwnn1.png",
+      "cloudName": "drqaon7o8",
+      "price": "Rp 7.000.000",
+      "oldPrice": "Rp 14.000.000",
+      "discount": "-50%",
+      "new": false,
+      "description": "Luxury big sofa",
+      "sku": "SS003",
+      "tags": "Chair, Coffee",
+      "category": "Chair"
+    },
+    {
+      "name": "Respira",
+      "id": 4,
+      "publicId": "https://res.cloudinary.com/dbrqcasoo/image/upload/v1725724712/respira_eqzorl.png",
+      "cloudName": "drqaon7o8",
+      "price": "Rp 500.000",
+      "new": true,
+      "description": "Outdoor bar table and stool",
+      "sku": "SS004",
+      "tags": "Chair, Coffee",
+      "category": "Chair"
+    }
+  ]
+}

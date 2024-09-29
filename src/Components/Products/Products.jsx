@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import cafe from "../../assets/cafe.svg";
 import chair from "../../assets/chair.svg";
 import big from "../../assets/big.svg";
@@ -11,7 +11,6 @@ import "./products.scss";
 import { useNavigate } from "react-router-dom";
 
 const Products = () => {
-  let redir = useNavigate();
   return (
     <div id="Products">
       <section className=" flex flex-col items-center justify-center mt-[56px]">

@@ -2,6 +2,10 @@ import React from "react";
 import logo2 from "../../assets/logo2.svg";
 import pointer from "../../assets/pointer.svg";
 import "./blog.scss";
+import Blog1 from "../Blog1/Blog1";
+import Blog2 from "../Blog2/Blog2";
+import Blog3 from "../Blog3/Blog3";
+import Topfooter from "../Topfooter/Topfooter";
 
 const Blog = () => {
   return (
@@ -24,6 +28,11 @@ const Blog = () => {
           <div>Blog</div>
         </div>
       </div>
+
+      <Blog1 />
+      <Blog2 />
+      <Blog3 />
+      <Topfooter />
     </div>
   );
 };

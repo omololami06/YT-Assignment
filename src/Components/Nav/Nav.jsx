@@ -37,7 +37,13 @@ const Nav = () => {
           <img src={img} alt="" />
           <img src={search} alt="" />
           <img src={favorite} alt="" />
-          <img onClick={() => setShow((prev) => !prev)} src={cart} alt="cart" />
+          <div>
+            <img
+              onClick={() => setShow((prev) => !prev)}
+              src={cart}
+              alt="cart"
+            />
+          </div>
         </li>
       </ol>
 
