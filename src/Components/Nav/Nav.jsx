@@ -37,12 +37,15 @@ const Nav = () => {
           <img src={img} alt="" />
           <img src={search} alt="" />
           <img src={favorite} alt="" />
-          <div>
+          <div className="relative">
             <img
               onClick={() => setShow((prev) => !prev)}
               src={cart}
               alt="cart"
             />
+            <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex justify-center items-center">
+              {cart.length}
+            </span>
           </div>
         </li>
       </ol>

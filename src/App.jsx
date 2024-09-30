@@ -6,6 +6,9 @@ const Nav = lazy(() => import("./Components/Nav/Nav"));
 const Home = lazy(() => import("./Components/Home/Home"));
 const Footer = lazy(() => import("./Components/Footer/Footer"));
 import { Route, Routes } from "react-router-dom";
+const SingleProduct = lazy(() =>
+  import("./Components/SingleProduct/SingleProduct")
+);
 const Shop = lazy(() => import("./Components/Shop/Shop"));
 const About = lazy(() => import("./Components/About/About"));
 const Contact = lazy(() => import("./Components/Contact/Contact"));
@@ -32,6 +35,7 @@ function App() {
           <Route path="/Cart" element={<Cart />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Comparison" element={<Comparison />} />
+          <Route path="/SingleProduct" element={<SingleProduct />} />
           <Route path="/About" element={<About />} />
           <Route path="/Contact" element={<Contact />} />
           <Route path="/Blog" element={<Blog />} />

@@ -4,43 +4,73 @@ import { images } from "../../../data/Shop1.json";
 import "./shop1.scss";
 import Pagination from "../Pagination/Pagination";
 import { Link } from "react-router-dom";
-import SingleProduct from "../SingleProduct/SingleProduct";
 import { useNavigate } from "react-router-dom";
 import { products } from "./shopProduct.json";
 import { useState } from "react";
+import { useRecoilState } from "recoil";
+import { cartData } from "../Atoms/CartAtoms";
+import { toast, ToastContainer } from "react-toastify";
 
-const Shop1 = () => {
-  // State to keep track of the cart count
-  const [cartCount, setCartCount] = useState(0);
+const Shop1 = ({ show, setShow }) => {
+  const handleShareClick = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
 
-  // Function to handle adding to cart
-  const handleAddToCart = () => {
-    // Increment the cart count
-    setCartCount(cartCount + 1);
+    // Show toast message on success
+    toast.success("URL Copied to Clipboard!", {
+      position: "top-right",
+      autoClose: 3000,
+    });
   };
 
-  const navigate = useNavigate();
-  // Navigate to the compare page with the product's ID
-  const handleComparison = () => {
-    navigate(`/comparison/${products.id}`); // Add product ID for navigation
+  const handleLikeClick = (id) => {
+    setLikedProducts((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
   };
+
+  // const [products, setProducts] = useState(ProductsData);
+  const [showToast, setShowToast] = useState(false);
+  const [likedProducts, setLikedProducts] = useState({});
+  const [cart, setCart] = useRecoilState(cartData);
+  const [viewedItems, setViewedItems] = useState([]);
+
+  function handleAddToCart(data) {
+    // Rename to avoid conflict with imported addToCartAction
+    if (cart.find((x) => x.id === data.id)) {
+      console.log("found");
+    } else {
+      console.log("not found");
+      setCart([...cart, data]);
+      setViewedItems([...viewedItems, data.id]);
+    }
+  }
+
+  let handleClose = (e) => {
+    setShow((prev) => !prev);
+  };
+
+  let redir = useNavigate();
 
   return (
     <div id="Shop1">
       <div className="flex flex-col items-center p-10 mx-auto max-w-screen-xl">
         <h2 className="text-[36px] font-bold"></h2>
         <ul className="py-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-poppins">
-          {products.map((each) => (
-            <div className="relative" key={each.id}>
+          {products.map((products) => (
+            <div className="relative" key={products.id}>
               <Image
-                cloudName={each.cloudName}
-                publicId={each.publicId}
+                cloudName={products.cloudName}
+                publicId={products.publicId}
                 loading="lazy"
                 className="relative"
               />
-              {each.discount && (
+              {products.discount && (
                 <div className="absolute top-6 bg-red-400 text-white px-3 py-4 rounded-full w-12 h-12 text-xs  ">
-                  <h5>{each.discount}</h5>
+                  <h5>{products.discount}</h5>
                 </div>
               )}
 
@@ -54,25 +84,43 @@ const Shop1 = () => {
                   </button>
 
                   <div className="flex space-x-4 text-white">
-                    <button className="hover:underline">Share</button>
-                    <button
-                      className="hover:underline"
-                      onClick={handleComparison}
-                    >
-                      Compare
-                    </button>
-                    <button className="hover:underline">Like</button>
+                    <div>
+                      <button
+                        onClick={handleShareClick}
+                        className="hover:underline"
+                      >
+                        Share
+                      </button>
+                    </div>
+
+                    <div>
+                      <button
+                        className="hover:underline"
+                        onClick={(e) => {
+                          handleClose(e);
+                          redir("/SingleProduct");
+                        }}
+                      >
+                        Compare
+                      </button>
+                    </div>
+
+                    <div onClick={() => handleLikeClick(products.id)}>
+                      <button className="hover:underline">
+                        {likedProducts[products.id] ? "Liked" : "Like"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="">
-                <h3 className="font-semibold text-[25px]">{each.name}</h3>
-                <p className="text-gray-500 text-sm"> {each.description}</p>
+                <h3 className="font-semibold text-[25px]">{products.name}</h3>
+                <p className="text-gray-500 text-sm"> {products.description}</p>
                 <div className="flex gap-5">
-                  <p className="font-semibold"> {each.price}</p>
+                  <p className="font-semibold"> {products.price}</p>
                   <div>
                     <p className="line-through text-gray-500">
-                      {each.oldPrice}
+                      {products.oldPrice}
                     </p>
                   </div>
                 </div>
@@ -82,8 +130,9 @@ const Shop1 = () => {
         </ul>
       </div>
 
+      {/* {showToast && <div className="toast"></div>} */}
+
       {/* <Pagination itemsPerPage={4} /> */}
-      {/* <SingleProduct /> */}
     </div>
   );
 };
